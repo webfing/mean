@@ -65,3 +65,43 @@ sublime text 巧手
 * yeoman官方安装包列表 http://yeoman.io/generators/official.html
 * grunt官方插件下载hot http://gruntjs.com/plugins
 * express文档 http://expressjs.com/4x/api.html
+* npm包搜索 http://npmsearch.com/
+* canimus css3兼容性
+
+##编码
+
+### npm包管理
+* 无论是安装还是删除，只有带了`--save`参数才会更新package.json文件
+* 带--save会更新到`dependencies`字段，而带--save-dev会更新到`devDependencies`开发版依懒中
+
+#### 版本标识
+
+参考资料：https://www.npmjs.org/doc/misc/semver.html
+
+* "~1.2.3"	=	">=1.2.3 <1.3.0"
+* "1.x.x"	=	">=1.0.0 <2.0.0"
+* "^1.2.3"	=	">=1.2.3 <2.0.0"
+* "*"		=	"任意版本"
+
+### bower插件管理
+基础结构与npm包的管理相同，只是在标识版本号上有异，npm是用`@`号来指识版本号，而bower是用`#`来标识的
+
+### grunt常用任务
+	
+	grunt.registerTask('build', [
+	    'clean:dist',		//清除目录
+	    'bower-install',	//bower包自动引入	***
+	    'useminPrepare',	//准备usemin		*****
+	    'concurrent:dist',	//多任务同时走
+	    'autoprefixer',		//添加css前缀		***
+	    'concat',			//js，css文件合并	****
+	    'ngmin',			//angular文件合并	**
+	    'copy:dist',		//复制文件			
+	    'cdnify',			//cdn替换
+	    'cssmin',			//css压缩			****
+	    'uglify',			//js压缩			****
+	    'rev',				//静态资源版本号	*****
+	    'usemin'			//合并，压缩，替换静态资源	*****
+	  ]);
+
+* 在对静态资源的处量时，经常要用到合并压缩等动作，会产生很多中间过渡文件，所以一般会创建一个`.tmp`文件夹来暂存
