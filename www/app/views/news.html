@@ -1,0 +1,77 @@
+<% include header.html %>
+
+<div id="banner" style="background: url('/images/img/banner-news.jpg') center center no-repeat">
+</div>
+
+<div id="crumbs">
+    <div class="container clearfix">
+        <div class="sixteen columns">
+            <div class="position">
+                <i class="sprite"></i>公司新闻
+            </div>
+            <div class="crumbWrap">
+                <i class="sprite"></i>
+                <a href="/">首页</a> &gt;
+                <span>公司新闻</span>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div id="content" class="container">
+    <div id="news" class="sixteen columns">
+        <form class="search" action="/news" method="GET">
+            <span style="margin-right: 30px;">新闻搜索</span>
+            <select name="type">
+                <option value="all">--所有新闻--</option>
+                <option value="firm">公司新闻</option>
+                <option value="business">行业新闻</option>
+            </select>
+            <input name="key" type="text" placeholder="关键字"/>
+            <button type="submit" class="btn red">搜索</button>
+        </form>
+        <div class="newsList">
+            <% if(data.length>0){%>
+            <ul class="clearfix">
+                <% for(var i=0; i<data.length; i++) {%>
+                <li>
+                    <%if (data[i].target.length>0){ %>
+                    <a href="<%= data[i].target %>" target="_blank" data-source="external"><img src="<%= data[i].thumb%>" width="280" height="140" alt=""/></a>
+                    <div class="title"><a href="<%= data[i].target %>" target="_blank" data-source="external"><%= data[i].title %></a></div>
+                    <%}else{%>
+                    <a href="/article?id=<%= data[i]._id %>"  target="_blank"><img src="<%= data[i].thumb%>" width="280" height="140" alt=""/></a>
+                    <div class="title"><a href="/article?id=<%= data[i]._id %>"  target="_blank"><%= data[i].title %></a></div>
+                    <%}%>
+                    <div class="time"><%= data[i].date %></div>
+                    <p><%= data[i].brief %></p>
+                </li>
+                <% } %>
+            </ul>
+            <div class="pagation">
+                <%if (current>1){%>
+                <a href="/news?page=<%=current-1%>">上一页</a>
+                <%}%>
+                <% for(var i=1; i<=total; i++){ %>
+                    <% if(i==current){ %>
+                    <a class="active"><%=i%></a>
+                    <%}else{%>
+                    <a href="/news?page=<%=i%>"><%=i%></a>
+                    <%}%>
+                <%}%>
+                <%if (current<total){%>
+                <a href="/news?page=<%=current+1%>">下一页</a>
+                <%}%>
+            </div>
+            <%}else{%>
+            <div class="empty-data"><i class="sprite"></i>没有查询到您想要的数据</div>
+            <%}%>
+        </div>
+    </div>
+</div>
+
+<% include footer.html %>
+<% include script.html %>
+
+</body>
+</html>

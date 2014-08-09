@@ -1,0 +1,97 @@
+<div ng-include="'partials/navbar'"></div>
+
+<div id="news" class="mb2">
+    <form name="myForm" class="form-horizontal" role="form" novalidate>
+
+        <div id="editWrap" class="mb2" ng-show="editshow">
+            <div class="form-group" ng-show="false">
+                <div class="col-sm-12">
+                    <input type="hidden" class="form-control" placeholder="文章ID" ng-model="post.id">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-12">
+                    <input type="text" required  ng-maxlength="25" class="form-control" placeholder="文章标题" name="title" ng-model="post.title">
+                    <span class="help-block" ng-show="myForm.title.$invalid && !myForm.title.$pristine">标题长度不能超出25字且不能为空！</span>
+                </div>
+            </div>
+            <script id="umeditor" name="content" type="text/plain" style="width:100%;height:500px;"></script>
+            <div class="form-group" style="margin-top: 15px;">
+                <div class="col-sm-12">
+                    <textarea class="form-control" name="brief" ng-maxlength="70" placeholder="文章简介(70字内，显示在新闻列表处)" ng-model="post.brief"></textarea>
+                    <span class="help-block" ng-show="!myForm.brief.$invalid">已输入字符数：{{post.brief.length}}</span>
+                    <span class="help-block" ng-show="myForm.brief.$invalid && !myForm.brief.$pristine">字符数超出</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-12">
+                    <label class="radio-inline">
+                        <input type="radio" name="type" ng-model="post.type" value="firm"  ng-checked="true"/> 公司新闻
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="type" ng-model="post.type" value="business"/> 行业新闻
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-12">
+                    <label class="radio-inline">
+                        <input type="radio" name="channel" ng-model="post.channel" value="interior" ng-checked="true"/> 内部文章
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="channel" ng-model="post.channel" value="external"/> 外链文章
+                    </label>
+                </div>
+            </div>
+            <div class="form-group" ng-show="targetShow">
+                <div class="col-sm-12">
+                    <input type="text" class="form-control" placeholder="http://" ng-model="post.target">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-12">
+                    <input required qdatepicker ng-model="post.date"  data-date-format="yyyy-mm-dd" data-date-viewmode="years" class="form-control date-picker" size="16" type="text" placeholder="选择日期"/>
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-success" ng-click="add();" ng-show="!editshow">添加文章</button>
+        <button type="submit" class="btn btn-success" ng-disabled="myForm.$invalid" ng-click="edit();" ng-show="editshow">提交文章</button>
+        <button type="reset" class="btn btn-info" ng-click="reset();" ng-show="editshow">取消</button>
+        <a class="btn btn-info" href="http://localhost:8000/news" target="_blank"><span class="glyphicon glyphicon-new-window"></span> 新闻列表</a>
+    </form>
+</div>
+
+
+<table id="table" class="table table-hover">
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>标题</th>
+        <th>文章类型</th>
+        <th>文章来源</th>
+        <th>发布时间</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="item in items">
+        <td>{{$index}}</td>
+        <td class="item|dou">{{item.title}}</td>
+        <td>{{item.type|newsType}}</td>
+        <td>{{item.channel|newsChannel}}</td>
+        <td>{{item.date}}</td>
+        <td>
+            <a class="label label-primary" ng-click="edit(item)">编辑</a>
+            <a rm-comfirm class="label label-danger newsDelete" tabindex="0" data-toggle="popover" on-comfirm="remove(item._id, $index)">删除</a>
+            <a target="_blank" class="label label-success" href="/article?id={{item._id}}">查看</a>
+        </td>
+    </tr>
+    <tr ng-show="emptyTable">
+        <td colspan="4">
+            <div class="text-center empty-data">
+                <i class="icon-bullhorn"></i> 没有查询到您想要的数据
+            </div>
+        </td>
+    </tr>
+    </tbody>
+</table>

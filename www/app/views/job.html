@@ -1,0 +1,92 @@
+<% include header.html %>
+
+<!--<div id="banner" style="background: url('/images/img/banner-job.jpg') center center no-repeat">
+</div>-->
+
+<div id="banner">
+    <div id="focus">
+        <div class="focusWarp">
+            <ul class="imgList">
+                <li><a href="javascript:;" style="background-image:url('images/img/banner-job.jpg')"></a></li>
+                <li><a href="javascript:;" style="background-image:url('images/img/banner-mx-2.jpg')"></a></li>
+                <li><a href="javascript:;" style="background-image:url('images/img/banner-mx-4.jpg')"></a></li>
+                <li><a href="javascript:;" style="background-image:url('images/img/banner-mx-5.jpg')"></a></li>
+            </ul>
+        </div>
+        <ul class="imgBtn">
+            <li><img src="/images/img/banner-job.jpg" width="90" height="36"></li>
+            <li><img src="/images/img/banner-mx-2.jpg" width="90" height="36"></li>
+            <li><img src="/images/img/banner-mx-4.jpg" width="90" height="36"></li>
+            <li><img src="/images/img/banner-mx-5.jpg" width="90" height="36"></li>
+        </ul>
+        <div class="container arrow">
+            <a class="prev" href="javascript:;"></a>
+            <a class="next" href="javascript:;"></a>
+        </div>
+    </div>
+</div>
+
+<div id="crumbs">
+    <div class="container clearfix">
+        <div class="sixteen columns">
+            <div class="position">
+                <i class="sprite"></i>工作机会
+            </div>
+            <div class="crumbWrap">
+                <i class="sprite"></i>
+                <a href="/">首页</a> &gt;
+                <a href="/job">工作机会</a> &gt;
+                <span>职位列表</span>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div id="content" class="container">
+    <div class="clearfix">
+        <div class="sixteen columns">
+            <ul class="joblist clearfix">
+                <% for(var i=0;i<data.length;i++){%>
+                <li><a href="/job/<%=data[i]._id%>">- <%=data[i].title%></a></li>
+                <%}%>
+            </ul>
+        </div>
+    </div>
+    <div class="clearfix">
+        <div class="four columns">
+            <h2 style="font-size:24px;color:#000000;font-weight:bold;">我们的福利待遇</h2>
+        </div>
+        <div class="twelve columns jobWeal">
+            <span><i class="sprite"></i>五险一金</span>
+            <span><i class="sprite"></i>车房双补</span>
+            <span><i class="sprite"></i>午晚双餐</span>
+            <span><i class="sprite"></i>商业保险</span>
+            <span><i class="sprite"></i>年度体检</span>
+        </div>
+    </div>
+    <div class="clearfix wealContent">
+        <div class="seven columns">
+            <div class="title">薪酬待遇</div>
+            <p>工       资：优于行业平均水平的月薪 <br/>
+                业绩奖金：视员工贡献及产品业绩而定    <br/>
+                年  终  奖：三薪保底           <br/>
+                累计薪酬可达15~36倍月薪</p>
+        </div>
+        <div class="nine columns">
+            <div class="title">我们将提供</div>
+            <p>1.人性化工作时间：每周5天、每天7.5小时   <br/>
+                2.公司提供各种带薪假期：年假、婚假、产假、陪产假、丧假等  <br/>
+                3.公司每年组织员工外出旅游       <br/>
+                4.公司提供传统节日礼品    <br/>
+                5.员工每年生日享有生日礼物   <br/>
+                6.公司为员工提供学习用报刊、书籍、学习、研发用的设备等</p>
+        </div>
+    </div>
+</div>
+
+<% include footer.html %>
+<% include script.html %>
+
+</body>
+</html>

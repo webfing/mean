@@ -1,0 +1,33 @@
+<div ng-include="'partials/navbar.html'"></div>
+
+<div class="row">
+  <div class="col-sm-12">
+    <h1>登录</h1>
+    <p>默认账号：<code>test@test.com</code> / <code>test</code></p>
+  </div>
+  <div class="col-sm-12">
+    <form class="form" name="form" ng-submit="login(form)" novalidate>
+
+      <div class="form-group">
+        <label>用户名(邮箱)：</label>
+
+        <input type="text" name="email" class="form-control" ng-model="user.email">
+      </div>
+
+      <div class="form-group">
+        <label>密码</label>
+        
+        <input type="password" name="password" class="form-control" ng-model="user.password">
+      </div>
+
+      <div class="form-group has-error">
+        <p class="help-block" ng-show="form.email.$error.required && form.password.$error.required && submitted">
+           请输入用户名和密码
+        </p>              
+        <p class="help-block">{{ errors.other }}</p>
+      </div>
+
+      <button type="submit" class="btn btn-primary"> 登录 </button>
+    </form>
+  </div>
+</div>

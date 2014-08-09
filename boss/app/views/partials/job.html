@@ -1,0 +1,116 @@
+<div ng-include="'partials/navbar'"></div>
+
+<div id="news" class="mb2">
+    <form novalidate name="myForm" class="form-horizontal" role="form">
+
+        <div id="editWrap" class="mb2" ng-show="editshow">
+            <div class="form-group" ng-show="false">
+                <div class="col-sm-12">
+                    <input type="hidden" class="form-control" placeholder="职位ID" ng-model="job.id">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-12">
+                    <input type="text" required  ng-maxlength="20" class="form-control" placeholder="职位名称" name="title" ng-model="job.title">
+                    <span class="help-block" ng-show="myForm.title.$invalid && !myForm.title.$pristine">职位名称长度不能超出20字且不能为空！</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-4">
+                    <select class="form-control" name="place" ng-model="job.place">
+                        <option value="深圳">深圳</option>
+                        <option value="广州">广州</option>
+                        <option value="北京">北京</option>
+                        <option value="上海">上海</option>
+                        <option value="杭州">杭州</option>
+                    </select>
+                </div>
+                <div class="col-sm-4">
+                    <select class="form-control" name="type" ng-model="job.type">
+                        <option value="技术类">技术类</option>
+                        <option value="美术类">美术类</option>
+                        <option value="策划类">策划类</option>
+                        <option value="管理类">管理类</option>
+                    </select>
+                </div>
+                <div class="col-sm-4">
+                    <input type="number" required  ng-maxlength="5" class="form-control" placeholder="招聘人数" name="number" ng-model="job.number">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-12">
+                    <label for="responsibility">工作职责(一行一条)</label>
+                    <textarea  rows="7" class="form-control" required name="responsibility" id="responsibility" ng-maxlength="600" placeholder="必填" ng-model="job.responsibility"></textarea>
+                    <span class="help-block" ng-show="!myForm.responsibility.$invalid">已输入字符数：{{post.responsibility.length}}</span>
+                    <span class="help-block" ng-show="myForm.responsibility.$invalid && !myForm.responsibility.$pristine">字符数超出</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-12">
+                    <label for="require">工作要求(一行一条)</label>
+                    <textarea rows="9" class="form-control" required  name="require" id="require" ng-maxlength="600" placeholder="必填" ng-model="job.require"></textarea>
+                    <span class="help-block" ng-show="!myForm.require.$invalid">已输入字符数：{{job.require.length}}</span>
+                    <span class="help-block" ng-show="myForm.require.$invalid && !myForm.require.$pristine">字符数超出</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-12">
+                    <label for="priority">优秀条件(一行一条)</label>
+                    <textarea rows="5" class="form-control" name="priority" id="priority" ng-maxlength="600" placeholder="可不填写" ng-model="job.priority"></textarea>
+                    <span class="help-block" ng-show="!myForm.priority.$invalid">已输入字符数：{{job.priority.length}}</span>
+                    <span class="help-block" ng-show="myForm.priority.$invalid && !myForm.priority.$pristine">字符数超出</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-12">
+                    <label for="other">其它说明</label>
+                    <textarea rows="5" class="form-control" name="other" id="other" ng-maxlength="600" placeholder="可不填写" ng-model="job.other"></textarea>
+                    <span class="help-block" ng-show="!myForm.other.$invalid">已输入字符数：{{job.other.length}}</span>
+                    <span class="help-block" ng-show="myForm.other.$invalid && !myForm.other.$pristine">字符数超出</span>
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-success" ng-click="add();" ng-show="!editshow">添加职位</button>
+        <button type="submit" class="btn btn-success" ng-disabled="myForm.$invalid" ng-click="edit();" ng-show="editshow">提交职位</button>
+        <button type="reset" class="btn btn-info" ng-click="reset();" ng-show="editshow">取消</button>
+        <a class="btn btn-info" href="http://localhost:8000/job" target="_blank"><span class="glyphicon glyphicon-new-window"></span> 职位列表</a>
+    </form>
+</div>
+
+
+<table id="table" class="table table-hover">
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>职位名称</th>
+        <th>职位类别</th>
+        <th>工作地点</th>
+        <th>招聘人数</th>
+        <th>发布时间</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-class="{true: 'success', false: ''}[item.applyers>0]" ng-repeat="item in items">
+        <td>{{$index}}</td>
+        <td class="item|dou">{{item.title}}</td>
+        <td>{{item.type}}</td>
+        <td>{{item.place}}</td>
+        <td>{{item.number}}</td>
+        <td>{{item.date}}</td>
+        <td>
+            <a class="label label-info" ng-click="edit(item)">编辑</a>
+            <a class="label label-success" href="/job/{{item._id}}" target="_blank">查看</a>
+            <a rm-comfirm class="label label-danger newsDelete" tabindex="0" data-toggle="popover" on-comfirm="remove(item._id, $index)">删除</a>
+            <a target="_blank" class="label label-primary" href="/qadmin/resumes?jobType={{item._id}}&marked=2">简历<span class="number"> {{item.applyers}}</span></a>
+        </td>
+    </tr>
+    <tr ng-show="emptyTable">
+        <td colspan="4">
+            <div class="text-center empty-data">
+                <i class="icon-bullhorn"></i> 没有查询到您想要的数据
+            </div>
+        </td>
+    </tr>
+    </tbody>
+</table>

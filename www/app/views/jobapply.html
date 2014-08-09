@@ -1,0 +1,100 @@
+<% include header.html %>
+
+<div id="banner" style="background: url('/images/img/banner-job.jpg') center center no-repeat">
+</div>
+
+<div id="crumbs">
+    <div class="container clearfix">
+        <div class="sixteen columns">
+            <div class="position">
+                <i class="sprite"></i>工作机会
+            </div>
+            <div class="crumbWrap">
+                <i class="sprite"></i>
+                <a href="/">首页</a> &gt;
+                <a href="#">工作机会</a> &gt;
+                <span>岗位申请</span>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div id="content" class="container">
+    <div class="sixteen columns jobApplay">
+        <h1>岂凡网络职位申请：<span><%=data.title%></span></h1>
+        <hr/>
+        <p>在岂凡，不同于你曾经做过的任何一份工作，你将受到挑战，你将得到启发，你的自豪感将油然而生，因为无论你在岂凡从事什么工作，你都将成为非凡
+            事业的其中一员。<br/>
+            欢迎你应聘岂凡网络。请花一分钟时间上传原有简历或者填写简历，谢谢！</p>
+        <hr/>
+        <div class="uploadResume">
+            简历： <a href="javascript:;" class="btn red" id="toPot">网上申请</a>
+            <a href="mailto:HR@qifun.com" class="btn blue" id="writeJob">邮件投递</a>
+        </div>
+        <hr/>
+        <div class="jobPlatform" id="jobPlatform" style="display:none;">
+            <a href="#"><img src="/images/img/job-pot-1.jpg" alt=""/></a>
+            <a href="#"><img src="/images/img/job-pot-2.jpg" alt=""/></a>
+            <a href="#"><img src="/images/img/job-pot-3.jpg" alt=""/></a>
+        </div>
+        <div id="applyJob" style="display:none;">
+            <!-- <form id="applyJobForm" action="/job/<%=data._id%>/apply" method="POST" enctype="multipart/form-data">
+                <ul>
+                    <li style="display: none;">
+                        <input name="jobId" type="hidden" value="<%=data._id%>"/>
+                    </li>
+                    <li>
+                        <label for="inputName">姓名 *：</label><input data-require="true" data-maxLength="10" name="name" id="inputName" type="text"/>
+                        <span class="help help-inline"><i class="sprite"></i>请输入10字以内的姓名</span>
+                        <span class="help help-require"><i class="sprite"></i>姓名必须填！</span>
+                        <span class="help help-error"><i class="sprite"></i>姓名不能超过10个字！</span>
+                        <span class="help help-success"><i class="sprite"></i></span>
+                    </li>
+                    <li>
+                        <label for="inputEmail">Email *：</label><input data-require="true"  data-reg="^\w+@\w+\.\w+$" name="email" id="inputEmail" type="text"/>
+                        <span class="help help-inline"><i class="sprite"></i>请输入您常用的联系邮箱</span>
+                        <span class="help help-require"><i class="sprite"></i>邮箱必须填！</span>
+                        <span class="help help-error"><i class="sprite"></i>邮箱格式不对！</span>
+                        <span class="help help-success"><i class="sprite"></i></span>
+                    </li>
+                    <li>
+                        <label for="inputPhone">联系电话 *：</label><input data-require="true"  data-reg="^(0|)(13|15|18|)\d{9}$" name="phone" id="inputPhone" type="text"/>
+                        <span class="help help-inline"><i class="sprite"></i>请输入您的手机号码</span>
+                        <span class="help help-require"><i class="sprite"></i>手机号码必须填！</span>
+                        <span class="help help-error"><i class="sprite"></i>手机号码格式不对！</span>
+                        <span class="help help-success"><i class="sprite"></i></span>
+                    </li>
+                    <li class="li-textarea">
+                        <label for="inputBrief">简介：</label><textarea data-maxLength="500" data-disable-html="true" name="brief" id="inputBrief" cols="100" rows="10"></textarea>
+                        <div class="help help-inline"><i class="sprite"></i>请输入500字以内的自我简介</div>
+                        <div class="help help-error"><i class="sprite"></i>输入字数起过500字！</div>
+                        <div class="help help-disabled-html"><i class="sprite"></i>请勿输入敏感html标签</div>
+                        <div class="help help-success"><i class="sprite"></i></div>
+                    </li>
+                    <li class="li-textarea">
+                        <label for="inputFile">上传附近：</label><input style="margin-bottom: 20px;" name="file" id="inputFile" type="file"/>
+                        <span class="help help-success" style="margin-left: 0"><i class="sprite"></i></span>
+                        <div style="margin-left: 90px;"><i class="sprite"></i>支持上传的文件后缀名:word,ppt,pdf,jpg</div>
+                        <div class="help help-error" style="margin-top: 10px;"><i class="sprite"></i>上传非法文件</div>
+                    </li>
+                    <li>
+                        <button type="submit"  id="submitBtn" class="btn red disabled" disabled="true">提 交</button>
+                        <a style="margin-left: 0" href="/job" class="btn red">返回列表页</a>
+                        <div class="message error" id="jobMessage">成功</div>
+                    </li>
+                </ul>
+            </form>
+            <div class="form-mask">
+                <div class="bg"></div>
+                <img class="loading" src="/images/loading.gif" alt=""/>
+            </div> -->
+        </div>
+    </div>
+</div>
+
+<% include footer.html %>
+<% include script.html %>
+
+</body>
+</html>

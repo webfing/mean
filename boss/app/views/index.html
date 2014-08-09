@@ -1,0 +1,87 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <base href="/">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    
+    <!-- build:css({.tmp,app}) styles/main.css -->
+    <link rel="stylesheet" href="styles/main.css">
+    <!-- endbuild -->
+
+    <!-- build:css({.tmp,app}) styles/style.css -->
+    <link rel="stylesheet" href="styles/style.css">
+    <!-- endbuild -->
+
+  </head>
+  <body ng-app="qifuncomApp">
+    <!--[if lt IE 7]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+    <!-- Add your site or application content here -->
+    <div class="container" ng-view=""></div>
+
+    <!--[if lt IE 9]>
+    <script src="bower_components/es5-shim/es5-shim.js"></script>
+    <script src="bower_components/json3/lib/json3.min.js"></script>
+    <![endif]-->
+
+    <!-- build:js(app) scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/jquery-form/jquery.form.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="bower_components/blockui/jquery.blockUI.js"></script>
+    <script src="bower_components/jquery.easing/js/jquery.easing.min.js"></script>
+    <script src="bower_components/moment/moment.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- build:js(app) scripts/plugins.js -->
+    <script src="lib/datepicker/js/bootstrap-datepicker.js"></script>
+    <script src="lib/datepicker/js/bootstrap-datepicker.zh-CN.js"></script>
+    <script src="/bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/modal.js" type="text/javascript"></script>
+    <script src="/bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/tooltip.js" type="text/javascript"></script>
+    <script src="/bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/popover.js" type="text/javascript"></script>
+    <script src="/bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/button.js" type="text/javascript"></script>
+    <script src="lib/ueditor/ueditor.config.js" type="text/javascript"></script>
+    <script src="lib/ueditor/ueditor.all.min.js" type="text/javascript"></script>
+    <script src="lib/ueditor/lang/zh-cn/zh-cn.js" type="text/javascript"></script>
+    <!-- endbuild -->
+
+
+    <!-- build:js({.tmp,app}) scripts/scripts.js -->
+    <script src="scripts/util.js" type="text/javascript"></script>
+    <script src="scripts/app.js"></script>
+    <script src="scripts/controllers/main.js"></script>
+    <script src="scripts/controllers/news.js"></script>
+    <script src="scripts/controllers/jobs.js"></script>
+    <script src="scripts/controllers/index.js"></script>
+    <script src="scripts/controllers/resume.js"></script>
+    <script src="scripts/controllers/navbar.js"></script>
+    <script src="scripts/controllers/login.js"></script>
+    <script src="scripts/controllers/signup.js"></script>
+    <script src="scripts/controllers/settings.js"></script>
+    <script src="scripts/services/auth.js"></script>
+    <script src="scripts/services/session.js"></script>
+    <script src="scripts/services/user.js"></script>
+    <script src="scripts/directives/mongooseError.js"></script>
+    <script src="scripts/directives/rmComfirm.js"></script>
+    <script src="scripts/filters/filter.js"></script>
+    <!-- endbuild -->
+    
+</body>
+</html>

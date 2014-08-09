@@ -1,0 +1,53 @@
+<% include header.html %>
+
+<div id="banner" style="background: url('/images/img/banner-job.jpg') center center no-repeat">
+</div>
+
+<div id="crumbs">
+    <div class="container clearfix">
+        <div class="sixteen columns">
+            <div class="position">
+                <i class="sprite"></i>工作机会
+            </div>
+            <div class="crumbWrap">
+                <i class="sprite"></i>
+                <a href="/">首页</a> &gt;
+                <a href="#">工作机会</a> &gt;
+                <span>职位介绍</span>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div id="content" class="container">
+    <div class="sixteen columns jobItem">
+        <h1><%=data.title%></h1>
+        <div class="meta">
+            <span><b>工作地点：</b><%=data.place%></span>
+            <span><b>职位类别：</b><%=data.type%></span>
+            <span><b>招聘人数：</b><%=data.number%>人</span>
+        </div>
+        <h3>工作职责：</h3>
+        <pre class="itemlist"><%=data.responsibility%></pre>
+        <h3>工作要求：</h3>
+        <pre class="itemlist"><%=data.require%></pre>
+        <% if (data.priority && data.priority.length>0){%>
+        <h3>优秀条件：</h3>
+        <pre class="itemlist"><%=data.priority%></pre>
+        <%}%>
+        <% if (data.other && data.other.length>0){%>
+        <h3>其它说明：</h3>
+        <pre class="itemlist"><%=data.other%></pre>
+        <%}%>
+        <div style="margin-top:20px;"></div>
+        <a href="/job/<%=data._id%>/apply" class="btn red">申 请</a>
+        <a href="/job" class="btn blue">返 回</a>
+    </div>
+</div>
+
+<% include footer.html %>
+<% include script.html %>
+
+</body>
+</html>
