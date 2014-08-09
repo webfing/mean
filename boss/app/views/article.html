@@ -1,0 +1,38 @@
+<!doctype html>
+<!--[if lt IE 7]>
+<html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>
+<html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>
+<html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <base href="/">
+    <title>岂凡官网 | 新闻详情</title>
+    <meta name="description" content="岂凡官网">
+    <meta name="viewport" content="width=device-width">
+
+    <!-- build:css({.tmp,app}) styles/article.css -->
+    <link rel="stylesheet" href="/bower_components/skeleton/stylesheets/base.css">
+    <!-- endbuild -->
+
+    <style>
+        * {margin:0;padding:0;}
+        h1,h2,h3,h4,h5,h6 {font-family: 'microsoft yahei'}
+        body {color:#666666;font-size:14px;padding:40px 20px;}
+        p {line-height: 2;}
+        h1 {color:#cc3300;font-size:24px;font-weight:bold;}
+        .time {font-size:12px;}
+    </style>
+</head>
+<body>
+      <h1><%= data.title %></h1>
+    <div class="time"><%= data.date %></div>
+    <div>
+        <%- data.content %>
+    </div>
+</body>
+</html>
