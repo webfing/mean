@@ -210,7 +210,8 @@ module.exports = function (grunt) {
     // additional tasks can operate on them
     useminPrepare: {
       html: ['<%= yeoman.app %>/views/header.html',
-             '<%= yeoman.app %>/views/script.html'],
+             '<%= yeoman.app %>/views/script.html',
+             '<%= yeoman.app %>/views/contact.html'],
       css: ['<%= yeoman.dist %>/public/styles/{,*/}*.css'],
       options: {
         dest: '<%= yeoman.dist %>/public'
@@ -293,6 +294,12 @@ module.exports = function (grunt) {
             'server.js',
             'lib/**/*'
           ]
+        }, {
+          expand: true,
+          dot: true,
+          cwd: '<%= yeoman.app %>/video',
+          dest: '<%= yeoman.dist %>/public/video',
+          src: ['*.flv','*.swf']
         }]
       },
       styles: {
@@ -405,7 +412,7 @@ module.exports = function (grunt) {
     'cssmin',
     'uglify',
     'rev',
-    'usemin'
+    'usemin',    
   ]);
 
   grunt.registerTask('default', [

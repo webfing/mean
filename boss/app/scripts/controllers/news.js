@@ -118,12 +118,7 @@ angular.module('qifuncomApp')
                         $scope.emptyTable = false;
                         $scope.items = data.data;
                         $("#table").unblock();
-                        $timeout(function(){
-                            // $(".newsDelete").popover({
-                            //     html: true
-                            // });
-                        },0);
-                        
+                        $scope.emptyTable = data.data.length==0;
                     }else{
                         $scope.emptyTable = true;
                     }

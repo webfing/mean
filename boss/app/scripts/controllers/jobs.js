@@ -60,6 +60,7 @@ angular.module('qifuncomApp')
                     if (data.status=="ok"){
                         $("#editWrap").unblock();
                         reInitEdit();
+                        $scope.emptyTable = data.data.length==0;
                         $timeout(function(){
                             $scope.query();
                         },0);

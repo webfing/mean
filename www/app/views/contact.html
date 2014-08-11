@@ -11,7 +11,7 @@
             </div>
             <div class="crumbWrap">
                 <i class="sprite"></i>
-                <a href="/">首页</a> &gt;
+                <a class="home" href="/">首页</a> &gt;
                 <span>联系我们</span>
             </div>
         </div>
@@ -45,6 +45,8 @@
 
 
 <script type="text/javascript">
+
+
     function initialize() {
 
         /**地图原史数据**/
@@ -54,17 +56,22 @@
         map.centerAndZoom(new BMap.Point(113.940044,22.548447), 19);
 
         //公司地址
-        var point = new BMap.Point(113.90137, 22.572449);
+        var point = new BMap.Point(113.939508,22.548112);
 
         //添加默认缩放平移控件
         map.addControl(new BMap.NavigationControl());
         map.addControl(new BMap.NavigationControl({anchor: BMAP_ANCHOR_BOTTOM_RIGHT, type: BMAP_NAVIGATION_CONTROL_ZOOM}));  //右下角，仅包含缩放按钮
 
         //创建小狐狸
-        var pt = new BMap.Point(113.939508,22.548416);
-        var myIcon = new BMap.Icon("/images/img/qifun.png", new BMap.Size(112,124));
-        var marker2 = new BMap.Marker(pt,{icon:myIcon});  // 创建标注
-        map.addOverlay(marker2);              // 将标注添加到地图中
+        // var pt = new BMap.Point(113.939508,22.548416);
+        // var myIcon = new BMap.Icon("/images/img/qifun.png", new BMap.Size(112,124));
+        // var marker2 = new BMap.Marker(pt,{icon:myIcon});  // 创建标注
+        // map.addOverlay(marker2);              // 将标注添加到地图中
+
+//point
+var marker = new BMap.Marker(point);  // 创建标注
+map.addOverlay(marker);              // 将标注添加到地图中
+marker.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
 
         //鼠标滚动地图放大缩小,先禁用
         map.enableScrollWheelZoom(true);
