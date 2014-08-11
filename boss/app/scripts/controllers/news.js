@@ -38,16 +38,25 @@ angular.module('qifuncomApp')
             $scope.editshow = false;
         }
 
-        var umText = UE.getEditor('umeditor', {
-            /* 传入配置参数,可配参数列表看umeditor.config.js */
-            toolbar: [
-                'source | undo redo | bold italic underline strikethrough | forecolor backcolor | removeformat |',
-                'insertorderedlist insertunorderedlist | fontfamily fontsize' ,
-                '| justifyleft justifycenter justifyright justifyjustify |',
-                'link unlink | image video ',
-                '| preview fullscreen'
-            ]
-        });
+        var umText;
+
+        function editInit(){
+            umText = new UE.ui.Editor({
+                initialFrameHeight: 500,
+                toolbar: [
+                    'source | undo redo | bold italic underline strikethrough | forecolor backcolor | removeformat |',
+                    'insertorderedlist insertunorderedlist | fontfamily fontsize' ,
+                    '| justifyleft justifycenter justifyright justifyjustify |',
+                    'link unlink | image video ',
+                    '| preview fullscreen'
+                ]
+            });
+            umText.render('umeditor');
+        }
+
+        $timeout(function(){
+            editInit();
+        },0);
 
         $scope.add = function(){
             $scope.editshow = true;
@@ -147,7 +156,7 @@ angular.module('qifuncomApp')
                 thumb = '/images/news-holder.jpg';
             thumb = (imgs && imgs[1] && imgs[1].length>0) ? imgs[1] : thumb;
             if (!/^http:\/\//.test(thumb)){
-                thumb = "http://localhost:9000"+thumb;
+                thumb = BossUrl+thumb;
             }
             return thumb;
         }

@@ -57,7 +57,7 @@
         <button type="submit" class="btn btn-success" ng-click="add();" ng-show="!editshow">添加文章</button>
         <button type="submit" class="btn btn-success" ng-disabled="myForm.$invalid" ng-click="edit();" ng-show="editshow">提交文章</button>
         <button type="reset" class="btn btn-info" ng-click="reset();" ng-show="editshow">取消</button>
-        <a class="btn btn-info" href="http://localhost:8000/news" target="_blank"><span class="glyphicon glyphicon-new-window"></span> 新闻列表</a>
+        <a class="btn btn-info" href="{{HomeUrl}}/news" target="_blank"><span class="glyphicon glyphicon-new-window"></span> 新闻列表</a>
     </form>
 </div>
 

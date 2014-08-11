@@ -5,7 +5,8 @@ angular.module('qifuncomApp')
 
         $scope.job = {
             type: '技术类',
-            place: '深圳'
+            place: '深圳',
+            number: 3
         };
 
         $scope.emptyTable = true;
@@ -15,6 +16,18 @@ angular.module('qifuncomApp')
         $scope.add = function(){
             $scope.editshow = true;
         };
+
+        function reInitEdit(){
+            $scope.job.type = '技术类';
+            $scope.job.place = '深圳';
+            $scope.job.number = 3;
+            $scope.job.responsibility = '';
+            $scope.job.require = '';
+            $scope.job.priority = '';
+            $scope.job.other = '';
+            $scope.job.title = '';
+            $scope.editshow = false;
+        }
 
         $scope.edit = function (item) {
 
@@ -46,6 +59,7 @@ angular.module('qifuncomApp')
                 .success(function(data){
                     if (data.status=="ok"){
                         $("#editWrap").unblock();
+                        reInitEdit();
                         $timeout(function(){
                             $scope.query();
                         },0);
@@ -56,6 +70,7 @@ angular.module('qifuncomApp')
 
         $scope.reset = function(){
             $scope.editshow = false;
+            reInitEdit();
         };
 
         $scope.query = function(){
@@ -84,6 +99,7 @@ angular.module('qifuncomApp')
                     if (data.status =="ok"){
                         $scope.items.splice(index,1);
                         $scope.editshow = false;
+                        reInitEdit();
                     }else{
                         $scope.emptyTable = true;
                     }

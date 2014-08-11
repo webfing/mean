@@ -2,7 +2,8 @@ var http = require('http');
 var fs = require('fs');
 var path = require('path');
 var url = require('url');
-var imgRootPath = 'http://localhost:8080/uploads/';
+var config = require('../config/env/all');
+var imgRootPath = config.BossUrl+'/uploads/';
 
 
 module.exports = function(app) {
@@ -96,15 +97,6 @@ module.exports = function(app) {
         }
     };
       
-    /*exports.fileGet = function (req, res) {
-        action[req.query.action](req, res);
-    }
-
-    exports.fileUp = function (req, res) {
-        action[req.query.action](req, res);
-    }*/
-
-
     return {
         fileGet: function (req, res) {
             action[req.query.action](req, res);

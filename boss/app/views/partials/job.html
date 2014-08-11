@@ -73,7 +73,7 @@
         <button type="submit" class="btn btn-success" ng-click="add();" ng-show="!editshow">添加职位</button>
         <button type="submit" class="btn btn-success" ng-disabled="myForm.$invalid" ng-click="edit();" ng-show="editshow">提交职位</button>
         <button type="reset" class="btn btn-info" ng-click="reset();" ng-show="editshow">取消</button>
-        <a class="btn btn-info" href="http://localhost:8000/job" target="_blank"><span class="glyphicon glyphicon-new-window"></span> 职位列表</a>
+        <a class="btn btn-info" href="{{HomeUrl}}/job" target="_blank"><span class="glyphicon glyphicon-new-window"></span> 职位列表</a>
     </form>
 </div>
 
@@ -100,9 +100,9 @@
         <td>{{item.date}}</td>
         <td>
             <a class="label label-info" ng-click="edit(item)">编辑</a>
-            <a class="label label-success" href="/job/{{item._id}}" target="_blank">查看</a>
+            <a class="label label-success" href="{{HomeUrl}}/job/{{item._id}}" target="_blank">查看</a>
             <a rm-comfirm class="label label-danger newsDelete" tabindex="0" data-toggle="popover" on-comfirm="remove(item._id, $index)">删除</a>
-            <a target="_blank" class="label label-primary" href="/qadmin/resumes?jobType={{item._id}}&marked=2">简历<span class="number"> {{item.applyers}}</span></a>
+            <a target="_blank" class="label label-primary" href="/resumes?jobType={{item._id}}&marked=2">简历<span class="number"> {{item.applyers}}</span></a>
         </td>
     </tr>
     <tr ng-show="emptyTable">

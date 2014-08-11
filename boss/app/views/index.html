@@ -14,6 +14,7 @@
     
     <!-- build:css({.tmp,app}) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="lib/datepicker/css/datepicker.css"/>
     <!-- endbuild -->
 
     <!-- build:css({.tmp,app}) styles/style.css -->
@@ -33,6 +34,13 @@
     <script src="bower_components/es5-shim/es5-shim.js"></script>
     <script src="bower_components/json3/lib/json3.min.js"></script>
     <![endif]-->
+
+    <script>
+
+        var HomeUrl = "<%=HomeUrl%>",
+            BossUrl = "<%=BossUrl%>";
+
+    </script>
 
     <!-- build:js(app) scripts/vendor.js -->
     <!-- bower:js -->
@@ -80,6 +88,7 @@
     <script src="scripts/services/user.js"></script>
     <script src="scripts/directives/mongooseError.js"></script>
     <script src="scripts/directives/rmComfirm.js"></script>
+    <script src="scripts/directives/datepicker.js"></script>
     <script src="scripts/filters/filter.js"></script>
     <!-- endbuild -->
     

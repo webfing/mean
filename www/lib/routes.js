@@ -2,6 +2,11 @@
 
 var api = require('./controllers/api'),
     multipart = require('connect-multiparty'),
+    config = require('./config/env/all'),
+    urlCfg = {
+        HomeUrl: config.HomeUrl,
+        BossUrl: config.BossUrl
+    },
     multipartMiddleware = multipart();
 
 /**
@@ -11,7 +16,7 @@ module.exports = function (app) {
 
     app.route('/webgame')
         .get(function(req, res){
-            res.render('webgame');
+            res.render('webgame', urlCfg);
         });
 
     app.route('/mobgame')
@@ -34,7 +39,7 @@ module.exports = function (app) {
 
     app.route('/video')
         .get(function(req, res){
-            res.render('video');
+            res.render('video', urlCfg);
         });
 
     app.route('/mission')

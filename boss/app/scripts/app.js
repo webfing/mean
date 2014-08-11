@@ -67,6 +67,9 @@ angular.module('qifuncomApp', [
     })
     .run(function ($rootScope, $location, Auth) {
 
+        $rootScope.HomeUrl = HomeUrl;
+        $rootScope.BossUrl = BossUrl;
+
         // Redirect to login if route requires auth and you're not logged in
         $rootScope.$on('$routeChangeStart', function (event, next) {
 

@@ -1,6 +1,11 @@
 'use strict';
 
-var path = require('path');
+var path = require('path'),
+    config = require('../config/env/all'),
+    urlCfg = {
+        HomeUrl: config.HomeUrl,
+        BossUrl: config.BossUrl
+    };
 
 /**
  * Send partial, or 404 if it doesn't exist
@@ -23,5 +28,5 @@ exports.partials = function(req, res) {
  * Send our single page app
  */
 exports.index = function(req, res) {
-  res.render('index');
+  res.render('index', urlCfg);
 };
