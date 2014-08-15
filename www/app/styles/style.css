@@ -60,6 +60,23 @@ a.btn:hover,
   text-decoration: none;
 }
 
+.btn.loading {
+  background: #fff;
+  display: none;
+  color: #555 !important;
+  width: 148px;
+  height: 38px;
+  border: 1px solid #ccc;
+}
+
+.btn.loading:hover {
+  background: #fff;
+}
+
+.btn.loading i {
+  vertical-align: middle;
+}
+
 .btn.blue {
   background: #3276bb;
 }
@@ -294,7 +311,6 @@ hr {
 
 #crumbs .crumbWrap .home {
   font-weight: bold;
-  font-size: 16px;
 }
 
 #crumbs .crumbWrap a:hover {
@@ -1132,8 +1148,13 @@ hr {
   width: 700px;
 }
 
-#applyJob .btn {
-  margin-left: 80px;
+#applyJob .btn-control {
+  margin-top: 20px;
+  padding-left: 100px;
+}
+
+#content #writeJob {
+  *display: none;
 }
 
 pre.itemlist {

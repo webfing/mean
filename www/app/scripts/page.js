@@ -1,15 +1,4 @@
 $(function(){
-    /*$("#focus").mogFocus({
-        autoScroll : false,
-        loadAnimation: false,
-        thumCSS : {"width": "100%"},
-        thumSubsty : {"opacity": "0.5"},   //缩略图样式
-        thumSelected : {"opacity": "1"}   //缩略图选中样式
-    }).hover(function(){
-        $(this).find('ul.imgBtn').stop().animate({'bottom':0, easing: 'easeInQuart'}, 300);
-    }, function(){
-        $(this).find('ul.imgBtn').stop().animate({'bottom':'-48px', easing: 'easeInQuart'}, 300);
-    });*/
 
     (function(){
         var current = 0,
@@ -85,25 +74,6 @@ $(function(){
         })
     }
 
-    if ($("#toPot").length>0){
-        var jobPlatform = $("#jobPlatform"),
-            applyJob = $("#applyJob");
-        $("#toPot").click(function(){
-            jobPlatform.slideDown();
-            applyJob.slideUp();
-        });
-        $("#writeJob").click(function(){
-            applyJob.slideDown();
-            jobPlatform.slideUp();
-        });
-
-        window.myFormTest = new Form('#applyJobForm', {
-            child: ['input', 'textarea'],
-            submitBtn: '#submitBtn'
-        });
-
-    }
-
     if($("#news").length>0 && isPC){
         $("#news li a").click(function(e){
             if ($(this).attr("data-source") != "external"){
@@ -113,6 +83,7 @@ $(function(){
         })
     }
 
+    //创使人交互效果
     /*if ($("#founders").length>0){
         $("#founders").find('.founder').hover(function(){
             $(this).find('img').stop().animate({'top': '-5px'}, 300);
@@ -156,4 +127,3 @@ var dialog = (function(){
         close: close
     }
 })();
-

@@ -30,8 +30,9 @@
         <hr/>
         <div class="uploadResume">
             简历： <a href="javascript:;" class="btn red" id="toPot">网上申请</a>
-            <a href="mailto:HR@qifun.com" class="btn blue" id="writeJob">邮件投递</a>
-            <a href="/job" class="btn green">返回列表</a>
+            <a href="javascript:;" class="btn blue onlineJob" id="writeJob">在线提交</a>
+            <a href="mailto:HR@qifun.com" class="btn green">邮件投递</a>
+            <!-- <a href="/job" class="btn green">返回列表</a> -->
         </div>
         <hr/>
         <div class="jobPlatform" id="jobPlatform" style="display:none;">
@@ -40,7 +41,7 @@
             <a href="#"><img src="/images/img/job-pot-3.jpg" alt=""/></a>
         </div>
         <div id="applyJob" style="display:none;">
-            <!-- <form id="applyJobForm" action="/job/<%=data._id%>/apply" method="POST" enctype="multipart/form-data">
+            <form id="applyJobForm" action="/job/<%=data._id%>/apply" method="POST" enctype="multipart/form-data">
                 <ul>
                     <li style="display: none;">
                         <input name="jobId" type="hidden" value="<%=data._id%>"/>
@@ -73,13 +74,19 @@
                         <div class="help help-disabled-html"><i class="sprite"></i>请勿输入敏感html标签</div>
                         <div class="help help-success"><i class="sprite"></i></div>
                     </li>
-                    <li class="li-textarea">
-                        <label for="inputFile">上传附近：</label><input style="margin-bottom: 20px;" name="file" id="inputFile" type="file"/>
-                        <span class="help help-success" style="margin-left: 0"><i class="sprite"></i></span>
-                        <div style="margin-left: 90px;"><i class="sprite"></i>支持上传的文件后缀名:word,ppt,pdf,jpg</div>
-                        <div class="help help-error" style="margin-top: 10px;"><i class="sprite"></i>上传非法文件</div>
+                    <li id="fileUpBox">
+                        <label for="inputFile">上传附近：</label>
+                        <input name="file" id="fileUrl" type="hidden"/>
+                        <span id="uploadWrap"><a href="javascript:;" id="inputFile" class="btn blue">选择文件</a></span>
+                        <a href="javascript:;" id="inputLoading" class="btn loading" style="display:none;"><i><img width="20" height="20" src="/images/loading-sm.gif" /></i> 努力上传中...</a>
+                        <span class="help help-success" style="margin-left: 0"><i class="sprite"></i><span></span></span>
+                        <span class="help help-error" style="margin-top: 10px;"><i class="sprite"></i><span></span></span>
+
+                        <div style="margin-left: 90px;margin-top:10px;">
+                            <i class="sprite"></i>支持的文件类型:word,pdf,jpg,zip(只能上传一个文件，多个文件请压缩再传)
+                        </div>
                     </li>
-                    <li>
+                    <li class="btn-control">
                         <button type="submit"  id="submitBtn" class="btn red disabled" disabled="true">提 交</button>
                         <a style="margin-left: 0" href="/job" class="btn red">返回列表页</a>
                         <div class="message error" id="jobMessage">成功</div>
@@ -89,13 +96,36 @@
             <div class="form-mask">
                 <div class="bg"></div>
                 <img class="loading" src="/images/loading.gif" alt=""/>
-            </div> -->
+            </div>
         </div>
     </div>
 </div>
 
 <% include footer.html %>
-<% include script.html %>
+
+<!-- build:js(app) scripts/upload.js -->
+    <script src="/bower_components/plupload/js/plupload.full.min.js"></script>
+    <script src="/bower_components/qiniu-js-sdk/src/qiniu.js"></script>
+<!-- endbuild -->
+
+<!-- build:js(app) scripts/vendor.js -->
+<script src="/bower_components/jquery/dist/jquery.js"></script>
+<script src="/bower_components/jquery.easing/js/jquery.easing.min.js"></script>
+<!-- endbuild -->
+
+<!-- build:js(app) scripts/jquery.form.js -->
+<script src="/bower_components/jquery-form/jquery.form.js"></script>
+<!-- endbuild -->
+
+<!-- build:js(app) scripts/main.js -->
+<script src="/scripts/common.js"></script>
+<script src="/scripts/index.js"></script>
+<script src="/scripts/page.js"></script>
+<!-- endbuild -->
+
+<!-- build:js(app) scripts/job.js -->
+<script src="/scripts/job.js"></script>
+<!-- endbuild -->
 
 </body>
 </html>

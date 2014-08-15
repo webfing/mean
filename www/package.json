@@ -18,7 +18,9 @@
     "passport-local": "~0.1.6",
     "ejs": "~0.8.4",
     "underscore": "^1.6.0",
-    "connect-multiparty": "^1.1.0"
+    "connect-multiparty": "^1.1.0",
+    "node-qiniu": "^6.1.6",
+    "qiniu": "^6.1.5"
   },
   "devDependencies": {
     "grunt": "~0.4.1",

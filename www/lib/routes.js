@@ -24,6 +24,10 @@ module.exports = function (app) {
             res.render('mobgame');
         });
 
+    app.route('/api/uptoken')
+        .get(api.uptoken);    
+    app.route('/api/receiveQiniu')
+        .post(api.receiveQiniu); 
     app.route('/job')
         .get(api.jobFeList);
     app.route('/job/:id')
