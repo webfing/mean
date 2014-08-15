@@ -17,6 +17,107 @@ angular.module('qifuncomApp')
         $scope.editshow = false;
         $scope.targetShow = false;
 
+        var thumbDefault = "http://qifun.qiniudn.com/news-holder.jpg";
+
+
+        var imgUpload = (function(){
+
+            var thumbUpload = $("#thumbUpload"),
+                addWrap = thumbUpload.find(".add"),
+                loadingWrap = thumbUpload.find(".loading"),
+                uploader,
+                showImgWrap = thumbUpload.find(".showImg");
+
+           showImgWrap.find(".remove") .click(function(event) {
+               remove();
+           });
+
+            uploader = Qiniu.uploader({
+                runtimes: 'html5,flash,html4',
+                browse_button: 'upload',
+                container: 'uploadBox',
+                drop_element: 'uploadBox',
+                max_file_size: '5mb',
+                flash_swf_url: '../../bower_components/plupload/js/Moxie.swf',
+                dragdrop: true,
+                multi_selection: false,
+                //unique_names: true,
+                //save_key: true,
+                chunk_size: '4mb',
+                uptoken_url: '/api/uptoken',
+                domain: 'http://qiupload.qiniudn.com/',
+                auto_start: true,
+                init: {
+                    'FilesAdded': function(up, files) {
+                        loading();
+                    },
+                    'BeforeUpload': function(up, file) {
+                    },
+                    'UploadProgress': function(up, file) {
+                    },
+                    'UploadComplete': function() {
+                    },
+                    'FileUploaded': function(up, file, info) {
+                        var domain = up.getOption('domain');
+                        var res = $.parseJSON(info);
+                        var sourceLink = domain + res.key;
+                        sourceLink = sourceLink+"?imageView2/1/w/280/h/140";
+                        showImg(sourceLink);
+                    },
+                    'Error': function(up, err, errTip) {
+                        console.log(errTip);
+                        if (err.status==403){
+                            return showMsg('.help-error', "文件类型不符合。请稍后重试。");
+                        }
+                        if (errTip){
+                            showMsg('.help-error', errTip);
+                        }
+                    },
+                    'Key': function(up, file) {
+                        var fileName = file.name;
+                        var size = file.size;
+                        var newName = fileName.replace(/\.([a-zA-Z]+)$/gi, function($$){
+                            return '_'+file.size+$$;
+                        });
+                        return newName;
+                        //return '';
+                    }
+                }
+            });
+
+            function loading(){
+                thumbUpload.children('li').hide();
+                loadingWrap.show();
+            }
+
+            function showImg(url){
+                thumbUpload.children('li').hide();
+                loadingWrap.show();
+                var imgHolder = showImgWrap.find("img")[0];
+                var img = new Image();
+                img.onload = function(){
+                    thumbUpload.children('li').hide();
+                    imgHolder.src = url;
+                    $scope.post.thumb = url;
+                    showImgWrap.show();
+                };
+                img.src = url;
+            }
+
+            function remove(url){
+                thumbUpload.children('li').hide();
+                addWrap.show();
+                $scope.post.thumb = thumbDefault;
+            }
+
+            return {
+                showImg: showImg,
+                remove: remove
+            }
+
+        })();
+
+
         $scope.$watch('post.channel', function(newVal, oldVal){
             if (newVal && newVal == 'external'){
                 $scope.targetShow = true;
@@ -36,6 +137,7 @@ angular.module('qifuncomApp')
             $scope.post.date = moment().format('YYYY-MM-DD');
             umText.setContent('');
             $scope.editshow = false;
+            imgUpload.remove();
         }
 
         var umText;
@@ -77,10 +179,14 @@ angular.module('qifuncomApp')
                 $scope.post.date = item.date;
                 umText.setContent(item.content);
                 $scope.editshow = true;
+                $scope.post.thumb = item.thumb;
+                if (thumbDefault !=item.thumb){
+                  imgUpload.showImg(item.thumb);
+                }
                 return;
             }
             $scope.post.content = umText.getContent();
-            $scope.post.thumb = matchThumb($scope.post.content);
+            //$scope.post.thumb = matchThumb($scope.post.content);
             util.blockUI("#editWrap");
             if (!!$scope.post.id){
                 method = 'PUT';

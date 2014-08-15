@@ -5,7 +5,67 @@ var mongoose = require('mongoose'),
     Thing = mongoose.model('Thing'),
     Post = mongoose.model('Post'),
     Applyer = mongoose.model('Applyer'),
+    qiniu = require("qiniu"),
     Job = mongoose.model('Job');
+
+// 配置密钥
+qiniu.conf.ACCESS_KEY = '-YfstYVbxO1oziTBZrktjYBDgNuUybNa_HZBcYTX'
+qiniu.conf.SECRET_KEY = 'IVQPY8m8BI00aH9e3RrlteWFx0lOuCNOPnOncgAc'
+
+//获得上传token
+var policy = new qiniu.rs.PutPolicy("qiupload");
+policy.deadline = 1451491200;
+policy.fsizeLimit = 1000*1000*5;
+//policy.saveKey = "testtesttest.doc";
+var allowType = [
+    "application/msword"            //doc.doc
+    ,"application/vnd.openxmlformats-officedocument.wordprocessingml.document"  //docx.docx&&wps.docx
+
+    ,"application/vnd.ms-works"     //wps.docx
+    ,"application/wps-office.wps"     //wps.docx
+    ,"application/wps-office.wpt"     //wps.docx
+    ,"application/kswps"     //wps.docx
+    ,"application/kset"     //wps.docx
+    ,"application/ksdps"     //wps.docx
+    ,"application/msword;application/rtf;application/msword-template"     //wps.docx
+    ,"application/vnd.openxmlformats-officedocument.wordprocessingml.template"     //wps.docx
+    ,"application/vnd.openxmlformats-officedocument.wordprocessingml.document"     //wps.docx
+
+    ,"application/msword"           //wps.doc
+    ,"application/kswps"            //wps.wps
+    ,"application/pdf"              //pdf
+    ,"image/jpeg"                   //jpg
+    ,"image/png"                    //png
+
+    ,"application/x-rar-compressed" //rar
+    ," application/octet-stream" //rar
+
+    ,"application/x-zip-compressed" //zip
+    ,"application/x-compressed" //zip
+    ,"application/zip" //zip
+    ,"multipart/x-zip" //zip
+
+];
+policy.mimeLimit = allowType.join(";");
+//policy.callbackUrl = "http://qifunhome.duapp.com/api/receiveQiniu";
+//policy.callbackBody = "key=$(key)&hash=$(etag)&w=$(imageInfo.width)&h=$(imageInfo.height)";
+
+var uptoken = policy.token();
+
+
+/**
+ * Get upload token
+ */
+exports.uptoken = function(req, res, next) {
+    res.header("Cache-Control", "max-age=0, private, must-revalidate");
+    res.header("Pragma", "no-cache");
+    res.header("Expires", 0);
+    if (uptoken) {
+        res.json({
+            uptoken: uptoken
+        });
+    }
+}
 
 /**
  * Get awesome things

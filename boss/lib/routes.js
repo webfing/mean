@@ -61,6 +61,9 @@ module.exports = function (app) {
         .get(uploader.fileGet)
         .post(uploader.fileUp);
 
+    app.route('/api/uptoken')
+        .get(api.uptoken); 
+
     app.route('/article')
         .get(api.postFeItem);
 

@@ -17,13 +17,60 @@
             </div>
             <script id="umeditor" name="content" type="text/plain" style="width:100%;height:500px;"></script>
             <div class="form-group" style="margin-top: 15px;">
-                <div class="col-sm-12">
-                    <textarea class="form-control" name="brief" ng-maxlength="70" placeholder="文章简介(70字内，显示在新闻列表处)" ng-model="post.brief"></textarea>
+                <div class="col-sm-8">
+                    <label for="brief">文章简介(显示在列表页，限70字)</label>
+                    <textarea class="form-control" name="brief" id="brief" ng-maxlength="70" placeholder="70字以内，显示在新闻列表处" ng-model="post.brief"  rows="3"></textarea>
                     <span class="help-block" ng-show="!myForm.brief.$invalid">已输入字符数：{{post.brief.length}}</span>
                     <span class="help-block" ng-show="myForm.brief.$invalid && !myForm.brief.$pristine">字符数超出</span>
+                    
+                    <div>
+                        <label class="radio-inline">
+                            <input type="radio" name="type" ng-model="post.type" value="firm"  ng-checked="true"/> 公司新闻
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="type" ng-model="post.type" value="business"/> 行业新闻
+                        </label>
+                    </div>
+
+                    <div>
+                        <label class="radio-inline">
+                            <input type="radio" name="channel" ng-model="post.channel" value="interior" ng-checked="true"/> 内部文章
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="channel" ng-model="post.channel" value="external"/> 外链文章
+                        </label>
+                    </div>
+
+                    <div ng-show="targetShow" style="margin:10px 0;">
+                        <input type="text" class="form-control" placeholder="http://" ng-model="post.target">
+                    </div>
+
+                </div>
+                <div class="col-sm-4">
+                    <label for="brief">缩略图(按280*140比例自动裁切)</label>
+                    <ul id="thumbUpload" class="list-unstyled">
+                        <li class="add text-center" id="uploadBox" style="display:block;">
+                            <div class="wrap" id="upload">
+                                <span class="glyphicon glyphicon-camera" title="点击上传图片"></span>
+                            </div>
+                        </li>
+                        <li class="loading">
+                            <div class="wrap">
+                                <div class="spinner"><div class="bounce1"></div><div class="bounce2"></div><div class="bounce3"></div></div>
+                            </div>
+                        </li>
+                        <li class="showImg">
+                            <div class="thumbnail">
+                                <img src="http://192.168.1.190:9000/uploads/1407722451792.jpg" alt="">
+                            </div>
+                            <div class="remove">
+                                <span class="glyphicon glyphicon-remove" title="删除"></span>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
             </div>
-            <div class="form-group">
+            <!-- <div class="form-group">
                 <div class="col-sm-12">
                     <label class="radio-inline">
                         <input type="radio" name="type" ng-model="post.type" value="firm"  ng-checked="true"/> 公司新闻
@@ -42,12 +89,12 @@
                         <input type="radio" name="channel" ng-model="post.channel" value="external"/> 外链文章
                     </label>
                 </div>
-            </div>
-            <div class="form-group" ng-show="targetShow">
+            </div> -->
+            <!-- <div class="form-group" ng-show="targetShow">
                 <div class="col-sm-12">
                     <input type="text" class="form-control" placeholder="http://" ng-model="post.target">
                 </div>
-            </div>
+            </div> -->
             <div class="form-group">
                 <div class="col-sm-12">
                     <input required qdatepicker ng-model="post.date"  data-date-format="yyyy-mm-dd" data-date-viewmode="years" class="form-control date-picker" size="16" type="text" placeholder="选择日期"/>
