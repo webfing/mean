@@ -111,3 +111,7 @@ sublime text 巧手
 * 七牛使用
 * 配使测试七牛上传回调，使用百度云
 ### 云布署
+
+##注意事项
+* 百度ueditor在git上的包是没有打包的，用bower下下来之后要用grunt初始化一次
+* 百度ueditor初始化之后，修改dist文件夹下的ueditor.config.js文件的上传路径

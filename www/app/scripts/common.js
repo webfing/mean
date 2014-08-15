@@ -178,7 +178,7 @@ var Form = (function(){
             this.messageElem.show(300, function(){
                 setTimeout(function(){
                     root.messageElem.hide(200);
-                },2000);
+                },4000);
             });
         },
         checkSubmit: function(){
