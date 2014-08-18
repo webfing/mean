@@ -6,6 +6,10 @@ angular.module('qifuncomApp')
         $scope.job = {
             type: '技术类',
             place: '深圳',
+            channel: [{
+                platform: "zhaopin",
+                url: 'http://www.baidu.com'
+            }],
             number: 3
         };
 
@@ -17,15 +21,35 @@ angular.module('qifuncomApp')
             $scope.editshow = true;
         };
 
+        $scope.addChannel = function(){
+            $scope.job.channel.push({
+                platform: "zhaopin",
+                url: ''
+            });
+        };
+
+        $scope.removeChannel = function(index){
+            $scope.job.channel.splice(index,1);
+        };
+
+        $scope.$watch("job.channel.length", function(newVal, oldVal){
+            $scope.showChannel = newVal ===0? true: false;
+        });
+
         function reInitEdit(){
             $scope.job.type = '技术类';
             $scope.job.place = '深圳';
+            $scope.job.id = '';
             $scope.job.number = 3;
             $scope.job.responsibility = '';
             $scope.job.require = '';
             $scope.job.priority = '';
             $scope.job.other = '';
             $scope.job.title = '';
+            $scope.job.channel = [{
+                platform: "zhaopin",
+                url: 'http://www.baidu.com'
+            }];
             $scope.editshow = false;
         }
 
@@ -41,6 +65,7 @@ angular.module('qifuncomApp')
                 $scope.job.require = item.require;
                 $scope.job.priority = item.priority;
                 $scope.job.other = item.other;
+                $scope.job.channel = item.channel;
                 $scope.job.number = item.number;
                 $scope.job.id = item._id;
                 $scope.editshow = true;

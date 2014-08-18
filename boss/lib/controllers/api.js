@@ -209,6 +209,7 @@ exports.jobAdd = function(req, res) {
     jobModel.type = queryData.type;
     jobModel.place = queryData.place;
     jobModel.responsibility = queryData.responsibility;
+    jobModel.channel = queryData.channel;
     jobModel.require = queryData.require;
     jobModel.priority = queryData.priority;
     jobModel.other = queryData.other;
@@ -275,6 +276,7 @@ exports.jobEdit = function(req, res) {
     jobObj.type = queryData.type;
     jobObj.place = queryData.place;
     jobObj.responsibility = queryData.responsibility;
+    jobObj.channel = queryData.channel;
     jobObj.require = queryData.require;
     jobObj.priority = queryData.priority;
     jobObj.other = queryData.other;
@@ -317,6 +319,7 @@ exports.jobFeApply = function(req, res) {
     Job.findOne({_id: req.params.id})
         .exec(function (err, job) {
             resMsg.data = job;
+            console.log(job);
             return res.render('jobapply', resMsg);
         });
 };

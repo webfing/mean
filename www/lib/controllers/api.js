@@ -141,11 +141,10 @@ exports.jobFeItem = function(req, res) {
 };
 
 exports.jobFeApply = function(req, res) {
-    var resMsg = {status:'ok',msg:'成功',data:null};
-    Job.findOne({_id: req.params.id})
-        .exec(function (err, job) {
+    var resMsg = {status:'ok',msg:'成功',data:null, channel:[]};
+    Job.findOne({_id: req.params.id}, function (err, job) {
             resMsg.data = job;
-            return res.render('jobapply', resMsg);
+            res.render('jobapply', resMsg);
         });
 };
 

@@ -14,6 +14,7 @@ var JobSchema = new Schema({
     applyers: {type:Number, default: 0},
     require: String,
     priority: String,
+    channel: Array,
     other: String,
     number: Number,
     date: String,

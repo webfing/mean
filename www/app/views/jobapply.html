@@ -36,9 +36,11 @@
         </div>
         <hr/>
         <div class="jobPlatform" id="jobPlatform" style="display:none;">
-            <a href="#"><img src="/images/img/job-pot-1.jpg" alt=""/></a>
-            <a href="#"><img src="/images/img/job-pot-2.jpg" alt=""/></a>
-            <a href="#"><img src="/images/img/job-pot-3.jpg" alt=""/></a>
+            <% if(data.channel && data.channel.length>0){%>
+            <% for (var i=0;i<data.channel.length; i++) {%>
+            <a href="<%=data.channel[i].url%>" target="_blank"><img src="/images/img/job-platform-<%=data.channel[i].platform%>.jpg" alt=""/></a>
+            <%}%>
+            <%}%>
         </div>
         <div id="applyJob" style="display:none;">
             <form id="applyJobForm" action="/job/<%=data._id%>/apply" method="POST" enctype="multipart/form-data">

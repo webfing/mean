@@ -41,7 +41,7 @@
                 <div class="col-sm-12">
                     <label for="responsibility">工作职责(一行一条)</label>
                     <textarea  rows="7" class="form-control" required name="responsibility" id="responsibility" ng-maxlength="600" placeholder="必填" ng-model="job.responsibility"></textarea>
-                    <span class="help-block" ng-show="!myForm.responsibility.$invalid">已输入字符数：{{post.responsibility.length}}</span>
+                    <span class="help-block" ng-show="!myForm.responsibility.$invalid">已输入字符数：{{job.responsibility.length}}</span>
                     <span class="help-block" ng-show="myForm.responsibility.$invalid && !myForm.responsibility.$pristine">字符数超出</span>
                 </div>
             </div>
@@ -67,6 +67,35 @@
                     <textarea rows="5" class="form-control" name="other" id="other" ng-maxlength="600" placeholder="可不填写" ng-model="job.other"></textarea>
                     <span class="help-block" ng-show="!myForm.other.$invalid">已输入字符数：{{job.other.length}}</span>
                     <span class="help-block" ng-show="myForm.other.$invalid && !myForm.other.$pristine">字符数超出</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-12">
+                    <label for="other">该职位在其它平台地址</label>
+                    <div ng-show="showChannel">
+                        <a href="javascript:;" class="btn btn-success" ng-click="addChannel();">
+                            <span class="glyphicon glyphicon-plus-sign"></span>
+                            添加
+                        </a>
+                    </div>
+                    <div class="row mb1" ng-repeat="item in job.channel track by $index">
+                       <div class="col-sm-2">
+                           <select class="form-control" name="place" ng-model="item.platform">
+                                <option value="zhaopin">智联招聘</option>
+                                <option value="51job">前程无忧</option>
+                                <option value="cjol">中国人才热线</option>
+                                <option value="lagou">拉勾网</option>
+                            </select>
+                       </div> 
+                       <div class="col-sm-8">
+                           <input type="text" required class="form-control" placeholder="http://" name="title" ng-model="item.url" value=>
+                       </div>
+                       <div class="col-sm-2">
+                            <a href="javascript:;" class="btn btn-success" ng-click="addChannel();">添加</a>
+                            <a href="javascript:;" class="btn btn-danger" ng-click="removeChannel($index);">删除</a>
+                       </div>
+                    </div>
+
                 </div>
             </div>
         </div>
