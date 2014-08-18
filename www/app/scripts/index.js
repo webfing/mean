@@ -1,6 +1,6 @@
 (function(){
     if (window.location.pathname != '/') return;
-    if (window.isPC || $(window).width()>1000){
+    if ((window.isPC || $(window).width()>1000)){
         var num = -1;
         var currentNum = -1;
         var time = 1600;

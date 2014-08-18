@@ -16,7 +16,7 @@ window.isPC = (function () {
     var path = window.location.pathname;
     $("#nav").find('li').each(function(){
         var curLi = $(this);
-        if (curLi.children('a').attr('href') == path){
+        if (curLi.children('a').attr('href') == path && curLi.children('a').attr('href') != "/coming"){
             $(this).addClass('active').attr('data-cur', 'on');
             $(this).parents('li').addClass('active').attr('data-cur', 'on');
         }
