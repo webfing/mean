@@ -7,7 +7,7 @@ module.exports = {
         '0.0.0.0',
   port: process.env.OPENSHIFT_NODEJS_PORT ||
         process.env.PORT ||
-        8080,
+        8000,
   mongo: {
     uri: process.env.MONGOLAB_URI ||
          process.env.MONGOHQ_URL ||
