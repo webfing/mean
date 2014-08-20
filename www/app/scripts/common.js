@@ -1,3 +1,6 @@
+/*
+判断是否为PC端
+*/
 window.isPC = (function () {
     var userAgentInfo = navigator.userAgent;
     var Agents = ["Android", "iPhone", "SymbianOS", "Windows Phone", "iPad", "iPod"];
@@ -8,10 +11,11 @@ window.isPC = (function () {
         }
     }
     return flag;
-
 })();
 
-//nav
+/*
+菜单当前项高亮
+ */
 (function(){
     var path = window.location.pathname;
     $("#nav").find('li').each(function(){
@@ -34,9 +38,10 @@ window.isPC = (function () {
     });
 })();
 
+/*
+菜单自适应
+*/
 (function(){
-
-
     if (!window.isPC && $(window).width()<980){
         document.getElementById('nav').className = 'mobNav';
         var switchNav = $('<a id="menu-btn"></a>');
@@ -45,10 +50,12 @@ window.isPC = (function () {
             $("#nav").slideToggle(300);
         })
     }
-
 })();
 
-var Form = (function(){
+/*
+通用表单类
+ */
+window.Form = (function(){
     function Form(root, option){
         this.root = $(root);
         var opt = $.extend({}, Form.setting, option);
@@ -210,7 +217,10 @@ var Form = (function(){
     return Form;
 })();
 
-var trim = (function(){
+/*
+通用字符串去首尾空格
+ */
+window.trim = (function(){
     if (String.prototype.trim){
         return function(string){
             return string.trim();

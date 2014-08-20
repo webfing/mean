@@ -4,11 +4,7 @@ var api = require('./controllers/api'),
     index = require('./controllers'),
     upload = require('./controllers/upload'),
     users = require('./controllers/users'),
-    qadmin = require('./controllers/qadmin'),
     session = require('./controllers/session'),
-    ueditor = require('./controllers/ueditor'),
-    multipart = require('connect-multiparty'),
-    multipartMiddleware = multipart(),
     busboy = require('connect-busboy'),
     middleware = require('./middleware');
 
@@ -65,7 +61,7 @@ module.exports = function (app) {
         .get(api.uptoken); 
 
     app.route('/article')
-        .get(api.postFeItem);
+        .get(api.postPreview);
 
     // All undefined api routes should return a 404
     app.route('/api/*')

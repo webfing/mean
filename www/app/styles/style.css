@@ -1559,7 +1559,7 @@ form .message.error {
   }
 
   #brief h1 {
-    background-size: auto 100%;
+    background-size: 100% auto;
     margin-top: 10px;
     height: 45px;
   }

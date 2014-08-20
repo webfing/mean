@@ -83,16 +83,6 @@ $(function(){
         })
     }
 
-    //创使人交互效果
-    /*if ($("#founders").length>0){
-        $("#founders").find('.founder').hover(function(){
-            $(this).find('img').stop().animate({'top': '-5px'}, 300);
-        },function(){
-            $(this).find('img').stop().animate({'top': '0px'}, 300);
-        })
-    }*/
-
-
     if($(".coming").length>0){
         var height = $(window).height()-$("#header").height()-70;
         $(".coming").height(height);

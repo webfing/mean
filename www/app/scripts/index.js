@@ -1,3 +1,7 @@
+/*
+* 首页图片滚动效果
+*/
+
 (function(){
     if (window.location.pathname != '/') return;
     if ((window.isPC || $(window).width()>1000)){
@@ -135,7 +139,7 @@
                 this.imgs = $(this).find('img').css({
                     'opacity': 0,
                     'cursor': 'pointer'
-                }); /* 2013-04-05 ���� */
+                }); 
 
                 this.mouseenterListener = function(event) {
 

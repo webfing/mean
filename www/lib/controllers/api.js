@@ -1,21 +1,27 @@
 'use strict';
 
 var mongoose = require('mongoose'),
-    File = require('../lib/file'),
     Post = mongoose.model('Post'),
     Applyer = mongoose.model('Applyer'),
     Job = mongoose.model('Job'),
     qiniu = require("qiniu");
 
+
+/*
+七牛上传配置
+ */
+
 // 配置密钥
-qiniu.conf.ACCESS_KEY = '-YfstYVbxO1oziTBZrktjYBDgNuUybNa_HZBcYTX'
-qiniu.conf.SECRET_KEY = 'IVQPY8m8BI00aH9e3RrlteWFx0lOuCNOPnOncgAc'
+qiniu.conf.ACCESS_KEY = '-YfstYVbxO1oziTBZrktjYBDgNuUybNa_HZBcYTX';
+qiniu.conf.SECRET_KEY = 'IVQPY8m8BI00aH9e3RrlteWFx0lOuCNOPnOncgAc';
 
 //获得上传token
 var policy = new qiniu.rs.PutPolicy("qitest");
+//配置文件过期时间
 policy.deadline = 1451491200;
+//配置上传大小限制
 policy.fsizeLimit = 1000*1000*5;
-//policy.saveKey = "testtesttest.doc";
+//配置上传类型限制
 var allowType = [
     "application/msword"            //doc.doc
     ,"application/vnd.openxmlformats-officedocument.wordprocessingml.document"  //docx.docx&&wps.docx
@@ -46,6 +52,11 @@ var allowType = [
 
 ];
 policy.mimeLimit = allowType.join(";");
+
+/*
+* 应用服务器响应，暂时不需要此功能
+* 后期，如果对上传安生要求更加严格时会用上
+ */
 //policy.callbackUrl = "http://qifunhome.duapp.com/api/receiveQiniu";
 //policy.callbackBody = "key=$(key)&hash=$(etag)&w=$(imageInfo.width)&h=$(imageInfo.height)";
 
@@ -53,7 +64,7 @@ var uptoken = policy.token();
 
 
 /**
- * Get upload token
+ * 获取 upload token
  */
 exports.uptoken = function(req, res, next) {
     res.header("Cache-Control", "max-age=0, private, must-revalidate");
@@ -67,18 +78,10 @@ exports.uptoken = function(req, res, next) {
 }
 
 
-/**
- * receive message
+
+/*
+文章列表
  */
-exports.receiveQiniu = function(req, res) {
-    var newToken = {
-        "uptoken": uptoken
-    };
-    return res.json(newToken);
-};
-
-
-
 exports.postFeList = function(req, res) {
     var resMsg = {status:'ok',msg:'成功',data:null, total: 0, current: 1};
     var option = {},
@@ -110,6 +113,9 @@ exports.postFeList = function(req, res) {
     });
 };
 
+/*
+文章详情
+ */
 exports.postFeItem = function(req, res) {
     var resMsg = {status:'ok',msg:'成功',data:null};
     Post.findOne({_id: req.query.id})
@@ -119,6 +125,9 @@ exports.postFeItem = function(req, res) {
         });
 };
 
+/*
+职位列表
+ */
 exports.jobFeList = function(req, res) {
     var resMsg = {status:'ok',msg:'成功',data:null};
     var option = {};
@@ -131,6 +140,9 @@ exports.jobFeList = function(req, res) {
         });
 };
 
+/*
+职位详情
+ */
 exports.jobFeItem = function(req, res) {
     var resMsg = {status:'ok',msg:'成功',data:null};
     Job.findOne({_id: req.params.id})
@@ -140,6 +152,9 @@ exports.jobFeItem = function(req, res) {
         });
 };
 
+/*
+职位申请页调取职位信息
+ */
 exports.jobFeApply = function(req, res) {
     var resMsg = {status:'ok',msg:'成功',data:null, channel:[]};
     Job.findOne({_id: req.params.id}, function (err, job) {
@@ -148,10 +163,14 @@ exports.jobFeApply = function(req, res) {
         });
 };
 
+/*
+提交职位申请
+ */
 exports.jobFeAdd = function(req, res) {
     var resMsg = {status:'ok',msg:'成功',data:null};
     var nowDate, dateString;
 
+    //以邮箱地址为ID，没查询到表示新增，否则表现修改
     Applyer.findOne({email: req.body.email, jobType: req.params.id})
         .exec(function (err, applyer) {
             if (applyer){
@@ -204,123 +223,12 @@ exports.jobFeAdd = function(req, res) {
 };
 
 
-// 本地上传版
-/*exports.jobFeAdd = function(req, res) {
-    var resMsg = {status:'ok',msg:'成功',data:null};
-    var myFile = new File();
-    var nowDate, dateString;
-
-    if (req.files && req.files.file){
-        myFile.check(req.files.file.path, function(err, msg, path){
-            if (err){
-                resMsg.status = 'error';
-                resMsg.msg = err;
-                return res.json(resMsg);
-            }else{
-                resMsg.msg = msg;
-                Applyer.findOne({email: req.body.email, jobType: req.params.id})
-                    .exec(function (err, applyer) {
-                        if (applyer){
-                            var applyerObj = {};
-                            applyerObj.name = req.body.name;
-                            applyerObj.phone = req.body.phone;
-                            applyerObj.brief = req.body.brief;
-                            nowDate = new Date();
-                            dateString = nowDate.getFullYear()+'-'+(nowDate.getMonth()+1)+'-'+nowDate.getDate();
-                            applyerObj.addtime = nowDate.getTime();
-                            applyerObj.date = dateString;
-
-                            Applyer.update({_id: applyer._id},{$set:applyerObj}, function(err){
-                                if (err){
-                                    resMsg.status = 'error';
-                                    resMsg.msg = err;
-                                }
-                                res.json(resMsg);
-                                saveFile(path, req.files.file.originalFilename, applyer._id);
-                            });
-                        }else{
-                            var newApplyer = new Applyer();
-                            var newId = newApplyer._id;
-                            newApplyer.email = req.body.email;
-                            newApplyer.name = req.body.name;
-                            newApplyer.phone = req.body.phone;
-                            newApplyer.brief = req.body.brief;
-                            newApplyer.jobType = req.params.id;
-                            newApplyer.marked = 0;
-                            newApplyer.show = true;
-                            nowDate = new Date();
-                            dateString = nowDate.getFullYear()+'-'+(nowDate.getMonth()+1)+'-'+nowDate.getDate();
-                            newApplyer.addtime = nowDate.getTime();
-                            newApplyer.date = dateString;
-
-                            newApplyer.save(function(err){
-                                if (err){
-                                    resMsg.status = 'error';
-                                    resMsg.msg = err;
-                                }
-                                res.json(resMsg);
-                                saveFile(path, req.files.file.originalFilename, newId);
-                            });
-                        }
-                    });
-            }
-        });
-    }else{
-        Applyer.findOne({email: req.body.email, jobType: req.params.id})
-            .exec(function (err, applyer) {
-                if (applyer){
-                    var applyerObj = {};
-                    applyerObj.name = req.body.name;
-                    applyerObj.phone = req.body.phone;
-                    applyerObj.brief = req.body.brief;
-                    applyerObj.accessory = '';
-                    nowDate = new Date();
-                    dateString = nowDate.getFullYear()+'-'+(nowDate.getMonth()+1)+'-'+nowDate.getDate();
-                    applyerObj.addtime = nowDate.getTime();
-                    applyerObj.date = dateString;
-                    Applyer.update({_id: applyer._id },{$set:applyerObj}, function(err){
-                        if (err){
-                            resMsg.status = 'error';
-                            resMsg.msg = err;
-                        }
-                        return res.json(resMsg);
-                    });
-                }else{
-                    var newApplyer = new Applyer();
-                    newApplyer.email = req.body.email;
-                    newApplyer.name = req.body.name;
-                    newApplyer.phone = req.body.phone;
-                    newApplyer.brief = req.body.brief;
-                    newApplyer.jobType = req.params.id;
-                    newApplyer.accessory = '';
-                    newApplyer.marked = 0;
-                    newApplyer.show = true;
-                    nowDate = new Date();
-                    dateString = nowDate.getFullYear()+'-'+(nowDate.getMonth()+1)+'-'+nowDate.getDate();
-                    newApplyer.addtime = nowDate.getTime();
-                    newApplyer.date = dateString;
-                    newApplyer.save(function(err){
-                        if (err){
-                            resMsg.status = 'error';
-                            resMsg.msg = err;
-                        }
-                        return res.json(resMsg);
-                    });
-                }
-            });
-    }
-
-
-    function saveFile(path, originName, id){
-        myFile.upload(path, originName, function(targetPath){
-            if (targetPath && targetPath.length>0){
-                targetPath = targetPath.replace('./app', '');
-            }else{
-                targetPath = '';
-            }
-            Applyer.update({_id: id},{$set:{accessory:targetPath}}, function(err){
-                console.log(err);
-            });
-        })
-    }
+/**
+ * 应用服务器回调, 暂时关闭      
+ */
+/*exports.receiveQiniu = function(req, res) {
+    var newToken = {
+        "uptoken": uptoken
+    };
+    return res.json(newToken);
 };*/

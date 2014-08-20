@@ -1,8 +1,11 @@
 <% include header.html %>
 
+<!-- 通栏图banner -->
 <div id="banner" style="background: url('/images/img/banner-contact.jpg') center center no-repeat">
 </div>
+<!-- /通栏图banner -->
 
+<!-- 面包屑 -->
 <div id="crumbs">
     <div class="container clearfix">
         <div class="sixteen columns">
@@ -15,9 +18,9 @@
                 <span>联系我们</span>
             </div>
         </div>
-
     </div>
 </div>
+<!-- /面包屑 -->
 
 <div id="content" class="container">
     <div id="contact">
@@ -62,16 +65,10 @@
         map.addControl(new BMap.NavigationControl());
         map.addControl(new BMap.NavigationControl({anchor: BMAP_ANCHOR_BOTTOM_RIGHT, type: BMAP_NAVIGATION_CONTROL_ZOOM}));  //右下角，仅包含缩放按钮
 
-        //创建小狐狸
-        // var pt = new BMap.Point(113.939508,22.548416);
-        // var myIcon = new BMap.Icon("/images/img/qifun.png", new BMap.Size(112,124));
-        // var marker2 = new BMap.Marker(pt,{icon:myIcon});  // 创建标注
-        // map.addOverlay(marker2);              // 将标注添加到地图中
-
-//point
-var marker = new BMap.Marker(point);  // 创建标注
-map.addOverlay(marker);              // 将标注添加到地图中
-marker.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
+        //跳动point
+        var marker = new BMap.Marker(point);  // 创建标注
+        map.addOverlay(marker);              // 将标注添加到地图中
+        marker.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
 
         //鼠标滚动地图放大缩小,先禁用
         map.enableScrollWheelZoom(true);
