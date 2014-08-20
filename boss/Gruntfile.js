@@ -538,7 +538,7 @@ module.exports = function (grunt) {
     'concat',
     'ngmin',
     'copy:dist',
-    //'copy:uploads',
+    'copy:uploads',
     //'copy:ueditor',
     'cdnify',
     'cssmin',
