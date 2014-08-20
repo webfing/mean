@@ -7,7 +7,8 @@ var api = require('./controllers/api'),
     urlCfg = {
         HomeUrl: config.HomeUrl,
         BossUrl: config.BossUrl
-    };
+    },
+    multipartMiddleware = multipart();
 
 /**
  * Application routes
@@ -72,7 +73,7 @@ module.exports = function (app) {
         .get(api.jobFeItem);
     app.route('/job/:id/apply')
         .get(api.jobFeApply)
-        .post(api.jobFeAdd);
+        .post(multipartMiddleware, api.jobFeAdd);
 
     app.route('/')
         .get(function(req, res){
