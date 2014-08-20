@@ -42,7 +42,7 @@
         <div class="jobPlatform" id="jobPlatform" style="display:none;">
             <% if(data.channel && data.channel.length>0){%>
             <% for (var i=0;i<data.channel.length; i++) {%>
-            <a href="<%=data.channel[i].url%>" target="_blank"><img src="/images/img/job-platform-<%=data.channel[i].platform%>.jpg" alt=""/></a>
+            <a href="<%=data.channel[i].url%>" target="_blank"><img src="/images/img/job-platform/<%=data.channel[i].platform%>.jpg" alt=""/></a>
             <%}%>
             <%}%>
         </div>

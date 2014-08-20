@@ -199,7 +199,8 @@ module.exports = function (grunt) {
             '<%= yeoman.dist %>/public/scripts/{,*/}*.js',
             '<%= yeoman.dist %>/public/styles/{,*/}*.css',
             '<%= yeoman.dist %>/public/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
-            '<%= yeoman.dist %>/public/styles/fonts/*'
+            '<%= yeoman.dist %>/public/styles/fonts/*',
+            '!<%= yeoman.dist %>/public/images/img/job-platform/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
           ]
         }
       }
@@ -302,6 +303,12 @@ module.exports = function (grunt) {
         cwd: '<%= yeoman.app %>/styles',
         dest: '.tmp/styles/',
         src: '{,*/}*.css'
+      },
+      jobImg: {
+        expand: true,
+        cwd: '<%= yeoman.app %>/images/img/job-platform',
+        dest: '<%= yeoman.dist %>/public/images/img/job-platform',
+        src: '{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
       }
     },
 
@@ -408,6 +415,7 @@ module.exports = function (grunt) {
     'uglify',
     'rev',
     'usemin',    
+    'copy:jobImg'    
   ]);
 
   grunt.registerTask('default', [
