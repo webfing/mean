@@ -16,6 +16,7 @@ $(function(){
 
         thumbList.click(function(){
             var index = thumbList.index($(this));
+            if (index==current) return false;
             go(index);
         });
         arrow.click(function(){
