@@ -26,9 +26,11 @@ window.isPC = (function () {
         }
         if (this.parentNode.id != "nav") return;
         curLi.hover(function(){
+            if (!$("#menu-btn").is(":hidden")) return;
             $(this).addClass('active');
             $(this).children('ul').show(0).stop().animate({"top":"-10px","opacity": "1"}, 300);
         }, function(){
+            if (!$("#menu-btn").is(":hidden")) return;
             $(this).children('ul').stop().animate({"top":"-40px","opacity": "0"}, 300, function(){
                 $(this).hide(0);
             });
@@ -42,14 +44,45 @@ window.isPC = (function () {
 菜单自适应
 */
 (function(){
-    if (!window.isPC && $(window).width()<980){
-        document.getElementById('nav').className = 'mobNav';
-        var switchNav = $('<a id="menu-btn"></a>');
-        $('.container', '#header').append(switchNav);
-        $("#menu-btn").click(function(){
-            $("#nav").slideToggle(300);
-        })
+
+    var isOldIe = (function(){
+        var isIE = !(- [ 1, ]);
+        var isIE6 = !window.XMLHttpRequest;
+        var isIE7 = isIE && !isIE6 && !isIE8;
+        var isIE8 = isIE && !!document.documentMode;
+        return isIE6||isIE7||isIE8;
+    })();
+
+    $("#menu-btn").click(function(){
+        $("#nav").find("ul").css({
+            'display':'block',
+            'opacity': '1',
+            'top': '0'
+        });
+        $("#nav").slideToggle(300);
+    });
+
+    resetMenu();
+
+    $(window).resize(function(){
+        resetMenu();
+    });
+
+    
+
+    function resetMenu(){
+        if ($(window).width()<959 && !isOldIe){
+            $("#nav").hide();
+            document.getElementById('nav').className = 'mobNav';
+        }else{
+            $("#nav").find('ul').css({
+                'display':'none'
+            });
+            $("#nav").show();
+            document.getElementById('nav').className = 'main-nav';
+        }
     }
+    
 })();
 
 /*

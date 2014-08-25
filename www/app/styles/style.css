@@ -137,7 +137,7 @@ hr {
   background: #000 url('../images/header-bg.jpg') top center no-repeat;
   color: #fff;
   position: relative;
-  z-index: 10;
+  z-index: 1000;
 }
 
 #header .five {
@@ -269,7 +269,7 @@ hr {
 }
 
 #menu-btn {
-  display: block !important;
+  display: none;
   background: url("../images/menu-btn.png");
   width: 42px;
   height: 33px;
@@ -529,6 +529,7 @@ hr {
 }
 
 #dot_btn button {
+  outline: none;
   border: none;
   padding: 0;
   margin: 0;
@@ -1458,34 +1459,25 @@ form .message.error {
   height: 600px;
 }
 
-/* #Tablet (Portrait)
+/* #小屏
 ================================================== */
 
 /* Note: Design for a width of 768px */
 
-@media only screen and (min-width: 768px) and (max-width: 959px) {
+@media only screen and (max-width: 959px) {
+  #menu-btn {
+    display: block;
+  }
 
-}
-
-/*  #Mobile (Portrait)
-================================================== */
-
-/* Note: Design for a width of 320px */
-
-@media only screen and (max-width: 767px) {
-
-}
-
-/* #Mobile (Landscape)
-================================================== */
-
-/* Note: Design for a width of 480px */
-
-@media only screen and (min-width: 300px) and (max-width: 767px) {
   #header,
   #header .container,
   #header .five {
     height: 80px;
+  }
+
+  #header .nav-wrap {
+    width: 100%;
+    margin-left: 0;
   }
 
   #logo {
@@ -1544,7 +1536,34 @@ form .message.error {
     border-top: 1px solid #222222;
     color: #ff6633;
   }
+}
 
+/* #Tablet (Portrait)
+================================================== */
+
+/* Note: Design for a width of 768px */
+
+@media only screen and (min-width: 768px) and (max-width: 959px) {
+
+}
+
+/*  #Mobile (Portrait)
+================================================== */
+
+/* Note: Design for a width of 320px */
+
+@media only screen and (max-width: 767px) {
+  #brief h1 {
+    background-size: auto 100%;
+  }
+}
+
+/* #Mobile (Landscape)
+================================================== */
+
+/* Note: Design for a width of 480px */
+
+@media only screen and (min-width: 300px) and (max-width: 767px) {
   #pages {
     display: none;
   }
@@ -1559,7 +1578,6 @@ form .message.error {
   }
 
   #brief h1 {
-    background-size: 100% auto;
     margin-top: 10px;
     height: 45px;
   }

@@ -8,7 +8,7 @@ angular.module('qifuncomApp')
             place: '深圳',
             channel: [{
                 platform: "zhaopin",
-                url: 'http://www.baidu.com'
+                url: ''
             }],
             number: 3
         };

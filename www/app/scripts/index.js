@@ -13,7 +13,8 @@
         var scrollHeight = 750;
 
         var rollingNum = 0;
-        var isRolling = true;
+        var isRolling = false;
+        var isRun = false;
         var totalCount = 4;
         var rollingInterval;
 
@@ -60,6 +61,7 @@
 
                 $(this).bind({
                     click: function(event) {
+                        if (isRun) return;
                         if ($item) {
                             $item.bind('mouseleave.default', this.mouseleaveListener);
                             $item.trigger('mouseleave');
@@ -281,7 +283,7 @@
                 var $pages = $('#pages');
                 var $page = $('.page');
                 var $menu = $('.navi_on div');
-                var isRun = false;
+                isRun = false;
 
                 initDefault();
                 initPages();
