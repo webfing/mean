@@ -101,6 +101,12 @@ angular.module('qifuncomApp')
                     $scope.post.thumb = url;
                     showImgWrap.show();
                 };
+                img.onerror = function(){
+                    thumbUpload.children('li').hide();
+                    imgHolder.src = thumbDefault;
+                    $scope.post.thumb = thumbDefault;
+                    showImgWrap.show();
+                }
                 img.src = url;
             }
 

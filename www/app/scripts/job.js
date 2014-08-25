@@ -34,7 +34,7 @@ var uploader = Qiniu.uploader({
     //save_key: true,
     chunk_size: '4mb',
     uptoken_url: '/api/uptoken',
-    domain: 'http://qitest.qiniudn.com/',
+    domain: 'http://qiupload.qiniudn.com/',
     auto_start: true,
     init: {
         'FilesAdded': function(up, files) {

@@ -16,7 +16,7 @@ qiniu.conf.ACCESS_KEY = '-YfstYVbxO1oziTBZrktjYBDgNuUybNa_HZBcYTX';
 qiniu.conf.SECRET_KEY = 'IVQPY8m8BI00aH9e3RrlteWFx0lOuCNOPnOncgAc';
 
 //获得上传token
-var policy = new qiniu.rs.PutPolicy("qitest");
+var policy = new qiniu.rs.PutPolicy("qiupload");
 //配置文件过期时间
 policy.deadline = 1451491200;
 //配置上传大小限制
@@ -90,7 +90,7 @@ exports.postFeList = function(req, res) {
     if (req.query.type && req.query.type != 'all'){
         option.type = req.query.type;
     }
-    if (req.query.key && req.query.key.trim().length>0){
+    if (req.query.key && req.query.key.trim && req.query.key.trim().length>0){
         option.content = new RegExp(req.query.key.trim(), "i");
     }
     if (req.query.page){
@@ -147,6 +147,9 @@ exports.jobFeItem = function(req, res) {
     var resMsg = {status:'ok',msg:'成功',data:null};
     Job.findOne({_id: req.params.id})
         .exec(function (err, job) {
+            if (err){
+                return res.redirect('/job');
+            }
             resMsg.data = job;
             return res.render('jobitem', resMsg);
         });
@@ -158,6 +161,9 @@ exports.jobFeItem = function(req, res) {
 exports.jobFeApply = function(req, res) {
     var resMsg = {status:'ok',msg:'成功',data:null, channel:[]};
     Job.findOne({_id: req.params.id}, function (err, job) {
+            if (err){
+                    return res.redirect('/job');
+                }
             resMsg.data = job;
             res.render('jobapply', resMsg);
         });
@@ -169,6 +175,40 @@ exports.jobFeApply = function(req, res) {
 exports.jobFeAdd = function(req, res) {
     var resMsg = {status:'ok',msg:'成功',data:null};
     var nowDate, dateString;
+    var name = req.body.name;
+    var email = req.body.email;
+    var phone = req.body.phone;
+    var accessory = req.body.file;
+    var brief = req.body.brief;
+    var emailReg = /^\w+@\w+\.\w+$/;
+    var phoneReg = /^(0|)(13|15|18|)\d{9}$/;
+    var accessoryReg = /^http:\/\/qiupload\.qiniudn\.com\/.*\.\w+$/;
+
+    if (!name||name.length>10){
+        return showMsg('姓名输入有误!');
+    }
+
+    if (!email|| !emailReg.test(email)){
+        return showMsg('邮箱输入有误!');
+    }
+
+    if (!phone|| !phoneReg.test(phone)){
+        return showMsg('电话号码输入有误!');
+    }
+
+    if (accessory && !accessoryReg.test(accessory)){
+        return showMsg('附近不对!');
+    }
+
+    if (brief && brief.length>500){
+        return showMsg('简介太长!');
+    }
+
+    function showMsg(msg){
+        resMsg.status = 'error';
+        resMsg.msg = msg;
+        return res.json(resMsg);
+    }
 
     //以邮箱地址为ID，没查询到表示新增，否则表现修改
     Applyer.findOne({email: req.body.email, jobType: req.params.id})
