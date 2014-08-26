@@ -1356,6 +1356,7 @@ pre.itemlist {
   font-size: 24px;
   font-weight: bold;
   border: none;
+  margin-bottom: 4px;
 }
 
 #contact .mess h2 {
@@ -1367,7 +1368,7 @@ pre.itemlist {
 }
 
 #contact .mess p {
-  margin-bottom: 25px;
+  margin-bottom: 15px;
 }
 
 #baiduMap {
