@@ -404,18 +404,18 @@ module.exports = function (grunt) {
   });
 
   grunt.registerTask('build', [
-    'clean:dist',
-    'bower-install',
-    'useminPrepare',
-    'concurrent:dist',
-    'autoprefixer',
-    'concat',
-    'copy:dist',
-    'cssmin',
-    'uglify',
-    'rev',
-    'usemin',    
-    'copy:jobImg'    
+    'clean:dist',         //清空布署版目录
+    'bower-install',      //bower包自动安装
+    'useminPrepare',      //usemin准备工作
+    'concurrent:dist',    //同时处理一些处务
+    'autoprefixer',       //css文件自动清加css3前缀
+    'concat',             //js代码合并
+    'copy:dist',          //拷贝相关文件
+    'cssmin',             //css压缩
+    'uglify',             //js加密
+    'rev',                //静态资源新鲜度判断
+    'usemin',             //合并文件
+    'copy:jobImg'         //自定义任务
   ]);
 
   grunt.registerTask('default', [

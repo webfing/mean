@@ -11,8 +11,8 @@ var mongoose = require('mongoose'),
  */
 
 // 配置密钥
-qiniu.conf.ACCESS_KEY = '-YfstYVbxO1oziTBZrktjYBDgNuUybNa_HZBcYTX'
-qiniu.conf.SECRET_KEY = 'IVQPY8m8BI00aH9e3RrlteWFx0lOuCNOPnOncgAc'
+qiniu.conf.ACCESS_KEY = ''
+qiniu.conf.SECRET_KEY = ''
 
 //获得上传token
 var policy = new qiniu.rs.PutPolicy("qiupload");
